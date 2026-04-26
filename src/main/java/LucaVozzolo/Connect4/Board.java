@@ -18,6 +18,10 @@ public class Board {
         return cols;
     }
 
+    public String getGridPos(int row,int column){ //returns token at grid position
+        return grid[row][column];
+    }
+
     public void displayBoard(){
         for (int r = 0; r < rows; r++){
             System.out.print("|");
@@ -29,7 +33,7 @@ public class Board {
                     System.out.print(" R |");
                 }
                 else if (grid[r][c] == "2"){
-                    System.out.print(" C |");
+                    System.out.print(" Y |");
                 }
             }
             System.out.println();
@@ -50,7 +54,6 @@ public class Board {
 
     public int placeMove(int column,int playerTurn){
         for (int r = (rows-1); r >=1; r--){ //loop to check first available slot in column starting from the bottom
-            System.out.println(r);
             if (grid[r][column] == null & playerTurn == 1){
                 grid[r][column] = "1";
                 return r;
@@ -61,5 +64,16 @@ public class Board {
             }
         }
         return -1;
+    }
+
+    public boolean isBoardFull(){
+        for (int r = 0; r < rows; r++){
+            for (int c = 0; c < cols; c++){
+                if (grid[r][c] == null){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
