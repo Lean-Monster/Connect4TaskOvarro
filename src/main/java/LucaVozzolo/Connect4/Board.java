@@ -23,20 +23,43 @@ public class Board {
             System.out.print("|");
             for (int c = 0; c < cols; c++){
                 if (grid[r][c] == null){
-                    System.out.print("  |");
+                    System.out.print("   |");
                 }
                 else if (grid[r][c] == "1"){
-                    System.out.print("R  |");
+                    System.out.print(" R |");
                 }
                 else if (grid[r][c] == "2"){
-                    System.out.print("C  |");
+                    System.out.print(" C |");
                 }
             }
             System.out.println();
         }
-        for (int col = 0; col < cols; col++){
-            System.out.print("  " + (col + 1));
+        System.out.print("  1" );
+        for (int col = 1; col < cols; col++){
+            System.out.print("   " + (col + 1));
         }
         System.out.println();
+    }
+
+    public boolean checkMove(int column){ //check if token can fit into the grid
+        if (grid[0][column] != null){ //checks to see if the column is full first
+            return false;
+        }
+        return true;
+    }
+
+    public int placeMove(int column,int playerTurn){
+        for (int r = (rows-1); r >=1; r--){ //loop to check first available slot in column starting from the bottom
+            System.out.println(r);
+            if (grid[r][column] == null & playerTurn == 1){
+                grid[r][column] = "1";
+                return r;
+            }
+            else if (grid[r][column] == null & playerTurn == 2){
+                grid[r][column] = "2";
+                return r;
+            }
+        }
+        return -1;
     }
 }
