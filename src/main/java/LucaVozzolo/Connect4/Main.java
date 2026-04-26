@@ -18,7 +18,7 @@ public class Main {
         sc.close();
     }
 
-    public static int inputValidator(Scanner sc){
+    public static int inputValidator(Scanner sc){ //validates the inputs in one function
         while (true){
             try{
                 int value = sc.nextInt();

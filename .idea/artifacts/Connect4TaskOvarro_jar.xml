@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Connect4TaskOvarro:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Connect4TaskOvarro_jar</output-path>
+    <root id="archive" name="Connect4TaskOvarro.jar">
+      <element id="module-output" name="Connect4TaskOvarro" />
+    </root>
+  </artifact>
+</component>
