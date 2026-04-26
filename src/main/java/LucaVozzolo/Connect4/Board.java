@@ -22,7 +22,7 @@ public class Board {
         return grid[row][column];
     }
 
-    public void displayBoard(){
+    public void displayBoard(){//method to display the board
         for (int r = 0; r < rows; r++){
             System.out.print("|");
             for (int c = 0; c < cols; c++){

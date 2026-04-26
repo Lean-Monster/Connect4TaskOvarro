@@ -14,7 +14,7 @@ public class Game {
         this.winLength = winlength;
     }
 
-    public void playGame(){
+    public void playGame(){//method which acts as the main game loop
         Scanner sc = new Scanner(System.in);
         while(true){ //loop until someone wins or grid is full
             System.out.println("Player " + playerTurn + "'s turn: ");
@@ -25,18 +25,18 @@ public class Game {
                 System.out.println("Column " + chosenColumn + " is full! Please select another one!");
                 continue;
             }
-            int chosenRow = board.placeMove(chosenColumn,playerTurn);
-            if (checkWin(playerTurn)){
+            int chosenRow = board.placeMove(chosenColumn,playerTurn); //places move while also storing row it was placed on if needed
+            if (checkWin(playerTurn)){ //checks and finishes game
                 board.displayBoard();
                 System.out.println("Player " + playerTurn + " has won!");
                 break;
             }
-            if (board.isBoardFull()){
+            if (board.isBoardFull()){ //draw check
                 board.displayBoard();
                 System.out.println("It is a draw!");
                 break;
             }
-            if (playerTurn == 1){
+            if (playerTurn == 1){ //switches player turn
                 playerTurn = 2;
             }
             else{
@@ -68,26 +68,26 @@ public class Game {
 
     public boolean checkWin(int playerTurn){
         String token = "-1";
-        if (playerTurn == 1){
+        if (playerTurn == 1){ //sets token to current players tokens in the grid to check against
             token = "1";
         }
         else if (playerTurn == 2){
             token = "2";
         }
-        return checkHorizontal(token) || checkVertical(token) || checkDiagonal(token);
+        return checkHorizontal(token) || checkVertical(token) || checkDiagonal(token);//checks each possible win condition
     }
 
-    public boolean checkHorizontal(String token){
+    public boolean checkHorizontal(String token){ //goes through each grid pos checking for players token
         int count = 0;
         for (int row = 0; row < board.getRows(); row++){
             for (int col = 0; col < board.getCols(); col++){
                 if (token == board.getGridPos(row,col)){
-                    count++;
+                    count++; //adds 1 to the count when current players token is found
                 }
                 else{
-                    count = 0;
+                    count = 0;//resets if next token isn't current players
                 }
-                if (count >= winLength){
+                if (count >= winLength){ //checks if highest streak is equal to or greater than the win condition
                     return true;
                 }
             }
@@ -96,7 +96,7 @@ public class Game {
         return false;
     }
 
-    public boolean checkVertical(String token){
+    public boolean checkVertical(String token){ //same thing as horizontal check but goes through vertically
         int count = 0;
         for (int col = 0; col < board.getCols(); col++){
             for (int row = 0; row < board.getRows(); row++){
@@ -120,7 +120,7 @@ public class Game {
                 if (countDirection(row,col,token,1,1) >= winLength){//checks top left to bottom right using the row and col direction
                     return true;
                 }
-                if (countDirection(row,col,token,1,-1) >= winLength){
+                if (countDirection(row,col,token,1,-1) >= winLength){//checks top right to bottom left on this one
                     return true;
                 }
             }
@@ -128,13 +128,13 @@ public class Game {
         return false;
     }
 
-    public int countDirection(int startRow, int startCol, String token, int rowDirection, int colDirection){
+    public int countDirection(int startRow, int startCol, String token, int rowDirection, int colDirection){//function for counting in set directions(diaganolly)
         int count = 0;
         int row = startRow;
         int col = startCol;
-        while (row >= 0 && row <board.getRows() && col >= 0 && col <board.getCols() && board.getGridPos(row,col) == token){
+        while (row >= 0 && row <board.getRows() && col >= 0 && col <board.getCols() && board.getGridPos(row,col) == token){//checks if within grid and matches current player token
             count++;
-            row += rowDirection;
+            row += rowDirection; //increases direction so it can move diagonally
             col += colDirection;
         }
         return count;
