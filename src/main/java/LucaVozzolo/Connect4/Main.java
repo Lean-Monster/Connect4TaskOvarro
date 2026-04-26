@@ -12,5 +12,8 @@ public class Main {
         int columns = sc.nextInt();
         System.out.println("Enter the winning row length: ");
         int winningRowLength = sc.nextInt();
+        Game game = new Game(rows, columns, winningRowLength);
+        game.playGame();
+        sc.close();
     }
 }
